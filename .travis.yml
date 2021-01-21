@@ -1,0 +1,21 @@
+language: python
+python:
+  - "3.7"
+
+env:
+  - PLATFORMIO_PROJECT_DIR=examples/arduino-blink
+  - PLATFORMIO_PROJECT_DIR=examples/gpio-blink
+  - PLATFORMIO_PROJECT_DIR=examples/adc-example
+  - PLATFORMIO_PROJECT_DIR=examples/socket-example
+  - PLATFORMIO_PROJECT_DIR=examples/ssl-socket-example
+  - PLATFORMIO_PROJECT_DIR=examples/ssl-socket-clientauth
+
+install:
+  - pip install -U https://github.com/OS-Q/S03/archive/master.zip
+  - platformio platform install file://.
+
+script:
+  - platformio run -d $PLATFORMIO_PROJECT_DIR
+
+notifications:
+  email: false
