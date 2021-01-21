@@ -22,7 +22,7 @@
 	],
 	"frameworks": [
 		"arduino",
-		"siwisdk"
+		"native"
 	],
 	"name": "Quectel M56",
 	"upload": {

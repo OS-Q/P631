@@ -5,6 +5,7 @@
 	"url": "https://siwi.in/",
 	"homepage": "https://help.siwi.in/",
 	"license": "MIT",
+	"version": "0.6.0",
 	"keywords": [
 		"dev-platform",
 		"GSM",
@@ -22,21 +23,25 @@
 		"type": "git",
 		"url": "https://github.com/siwiembedded/platform-siwigsm.git"
 	},
-	"version": "0.6.0",
-	"vendor": "SiWi Embedded Solutions Pvt. Ltd.",
+	"packageRepositories": [
+		"http://182.61.61.133/link/toolchain/manifest.json",
+		"http://182.61.61.133/link/toolchain/openocd.json",
+		"http://182.61.61.133/link/framework/manifest.json",
+		"http://182.61.61.133/link/platformio.json"
+	],
 	"frameworks": {
-		"siwisdk": {
-			"package": "framework-siwisdk",
-			"script": "builder/framework/siwisdk.py",
+		"native": {
+			"package": "N13",
+			"script": "builder/framework/native.py",
 			"description": "SIWI Software Development Kit for GSM & NBIoT SoCs (MT6261, MT2503 and MT2625)",
-			"homepage": "https://github.com/siwiembedded/siwisdk",
+			"homepage": "https://github.com/OS-Q/N13",
 			"title": "SIWI GSM & NBIoT SDK"
 		},
 		"arduino": {
-			"package": "framework-siwiduino",
-			"script": "builder/framework/siwiduino.py",
+			"package": "A13",
+			"script": "builder/framework/arduino.py",
 			"description": "Arduino Wiring-based Framework For SiWi and Quectel Modules",
-			"homepage": "https://github.com/siwiembedded/siwiduino",
+			"homepage": "https://github.com/OS-Q/A13",
 			"title": "Arduino Framework"
 		}
 	},
@@ -46,14 +51,14 @@
 			"owner": "platformio",
 			"version": "~1.80201.0"
 		},
-		"framework-siwisdk": {
+		"N13": {
 			"type": "framework",
-			"version": "~0.6.0"
+			"version": "https://github.com/OS-Q/N13.git"
 		},
-		"framework-siwiduino": {
+		"A13": {
 			"type": "framework",
 			"optional": true,
-			"version": "~0.4.0"
+			"version": "https://github.com/OS-Q/A13.git"
 		},
 		"tool-siwiflasher": {
 			"type": "uploader",

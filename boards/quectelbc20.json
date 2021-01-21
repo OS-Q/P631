@@ -24,7 +24,7 @@
 	],
 	"frameworks": [
 		"arduino",
-		"siwisdk"
+		"native"
 	],
 	"name": "Quectel BC20",
 	"upload": {

@@ -15,7 +15,7 @@
 	],
 	"frameworks": [
 		"arduino",
-		"siwisdk"
+		"native"
 	],
 	"name": "Quectel M66",
 	"upload": {

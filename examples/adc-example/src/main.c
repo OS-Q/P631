@@ -1,9 +1,3 @@
-/**
- * @file main.c
- * ADC Example
- * @author Ajay Bhargav
- *
- */
 
 #include <stdio.h>
 #include <unistd.h>
