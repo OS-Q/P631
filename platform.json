@@ -1,18 +1,17 @@
 {
 	"name": "P13",
 	"title": "Platform P13",
-	"description": "Development Platform for GSM SoCs (MT6261,MT2503)",
+	"description": "Development Platform for GSM SoCs (MT6261,MT2503,MT2625)",
 	"homepage": "https://www.OS-Q.com/P13",
 	"license": "MIT",
 	"version": "0.6.1",
 	"keywords": [
 		"dev-platform",
 		"OS-Q",
-		"NBIoT",
-		"Quectel",
 		"MT2621",
 		"MT2503",
 		"MT2625",
+		"NBIoT",
 		"GSM"
 	],
 	"engines": {
@@ -24,22 +23,23 @@
 	},
 	"packageRepositories": [
 		"http://182.61.61.133/link/toolchain/manifest.json",
-		"http://182.61.61.133/link/toolchain/openocd.json",
 		"http://182.61.61.133/link/framework/manifest.json",
+		"http://182.61.61.133/link/toolchain/openocd.json",
+		"http://dl.platformio.org/packages/manifest.json",
 		"http://182.61.61.133/link/platformio.json"
 	],
 	"frameworks": {
 		"native": {
 			"package": "N13",
 			"script": "builder/framework/native.py",
-			"description": "SIWI Software Development Kit for GSM & NBIoT SoCs (MT6261, MT2503 and MT2625)",
+			"description": "Native Software Development Kit for GSM & NBIoT SoCs(MT6261, MT2503 and MT2625)",
 			"homepage": "https://github.com/OS-Q/N13",
 			"title": "SIWI GSM & NBIoT SDK"
 		},
 		"arduino": {
 			"package": "A13",
 			"script": "builder/framework/arduino.py",
-			"description": "Arduino Wiring-based Framework For SiWi and Quectel Modules",
+			"description": "Arduino Wiring-based Framework For GSM & NBIoT Modules",
 			"homepage": "https://github.com/OS-Q/A13",
 			"title": "Arduino Framework"
 		}
@@ -52,16 +52,17 @@
 		},
 		"N13": {
 			"type": "framework",
+			"owner": "OS-Q",
 			"version": "https://github.com/OS-Q/N13.git"
 		},
 		"A13": {
 			"type": "framework",
+			"owner": "OS-Q",
 			"optional": true,
 			"version": "https://github.com/OS-Q/A13.git"
 		},
 		"tool-siwiflasher": {
 			"type": "uploader",
-			"optional": true,
 			"version": "~2.1.0"
 		}
 	},

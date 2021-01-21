@@ -1,14 +1,9 @@
-
 #include <stdio.h>
 #include <unistd.h>
 
 #include <lib.h>
 #include <ril.h>
 #include <os_api.h>
-#include <hw/adc.h>
-
-#define MVOLTPERDIV         2.737f
-#define ADC2MVOLT(val)      ((float)val * MVOLTPERDIV)
 
 /**
  * URC Handler
@@ -101,27 +96,10 @@ static void urc_callback(unsigned int param1, unsigned int param2)
  * Sample Task
  * @param arg	Task Argument
  */
-static void adc_task(void *arg)
+static void sample_task(void *arg)
 {
-	unsigned int adc_val;
-
-	/*
-	 * Configure ADC Channels
-	 */
-	adc_config(ADC_CH0);
-	adc_config(ADC_CH1);
-	adc_config(ADC_CH2);
-
 	while (1) {
-		/*
-		* Read ADC Channels
-		*/
-		adc_val = adc_read(ADC_CH0);
-		printf("ADC Channel 0: %d, %.2fmV\n", adc_val, ADC2MVOLT(adc_val));
-		adc_val = adc_read(ADC_CH1);
-		printf("ADC Channel 1: %d, %.2fmV\n", adc_val, ADC2MVOLT(adc_val));
-		adc_val = adc_read(ADC_CH2);
-		printf("ADC Channel 2: %d, %.2fmV\n", adc_val, ADC2MVOLT(adc_val));
+		printf("Hello world\n");
 		sleep(1);
 	}
 }
@@ -138,13 +116,13 @@ int main(int argc, char *argv[])
 
 	printf("System Ready\n");
 
-	/* Create ADC task */
-	os_create_task(adc_task, NULL, FALSE);
+	/* Create Application tasks */
+	os_create_task(sample_task, NULL, FALSE);
 
 	printf("System Initialization finished\n");
 
 	while (1) {
-		/* main task loop */
+		/* Main task */
 		sleep(1);
 	}
 }
