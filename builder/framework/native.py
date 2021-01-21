@@ -195,7 +195,7 @@ if board.get("build.mcu") != "MT2625":
         ],
 
         LIBS=[
-            "native",
+            "siwisdk",
         ],
     )
 else:
@@ -243,7 +243,7 @@ env.Append(ASFLAGS=env.get("CCFLAGS", [])[:])
 
 def load_siwilib_debug():
     for i, libs in enumerate(env["LIBS"]):
-        if libs.startswith("native") or libs.startswith("siwinbiot"):
+        if libs.startswith("siwisdk") or libs.startswith("siwinbiot"):
             env["LIBS"][i] = libs + "_debug"
 
 if board.get("build.siwilib") == "debug":
