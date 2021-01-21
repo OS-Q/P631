@@ -8,7 +8,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: [3.7]
+        python-version: [3.8]
         example:
           - "examples/arduino-blink"
           - "examples/gpio-blink"
