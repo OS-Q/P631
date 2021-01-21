@@ -1,6 +1,6 @@
 {
 	"build": {
-		"core": "siwigsm",
+		"core": "gsm",
 		"cpu": "arm9ejs",
 		"f_cpu": "260000000L",
 		"mcu": "MT6261",
@@ -32,5 +32,5 @@
 		"speed": 460800
 	},
 	"url": "https://www.quectel.com/cn/product/m56.htm",
-	"vendor": "Quectel Wireless Solutions Co., Ltd."
+	"vendor": "Quectel"
 }

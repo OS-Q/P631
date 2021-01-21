@@ -1,12 +1,3 @@
-"""
-Arduino
-
-Arduino Wiring-based Framework allows writing cross-platform software to
-control devices attached to a wide range of Arduino boards to create all
-kinds of creative coding, interactive objects, spaces or physical experiences.
-
-http://arduino.cc/en/Reference/HomePage
-"""
 
 from os.path import abspath, isdir, isfile, join, dirname, getsize
 from os import remove
@@ -281,7 +272,7 @@ if "build.variant" in env.BoardConfig():
     env.Append(
         CPPPATH=[
             join(FRAMEWORK_DIR, "variants",
-                 env.BoardConfig().get("build.variant"))
+                env.BoardConfig().get("build.variant"))
         ]
     )
     libs.append(env.BuildLibrary(

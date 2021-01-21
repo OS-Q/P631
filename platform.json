@@ -2,26 +2,25 @@
 	"name": "P13",
 	"title": "Platform P13",
 	"description": "Development Platform for GSM SoCs (MT6261,MT2503)",
-	"url": "https://siwi.in/",
-	"homepage": "https://help.siwi.in/",
+	"homepage": "https://www.OS-Q.com/P13",
 	"license": "MIT",
-	"version": "0.6.0",
+	"version": "0.6.1",
 	"keywords": [
 		"dev-platform",
-		"GSM",
+		"OS-Q",
 		"NBIoT",
 		"Quectel",
 		"MT2621",
 		"MT2503",
 		"MT2625",
-		"GSM IoT"
+		"GSM"
 	],
 	"engines": {
 		"platformio": "^5"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/siwiembedded/platform-siwigsm.git"
+		"url": "https://github.com/OS-Q/P13.git"
 	},
 	"packageRepositories": [
 		"http://182.61.61.133/link/toolchain/manifest.json",
