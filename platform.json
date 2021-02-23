@@ -1,25 +1,24 @@
 {
-	"name": "P13",
-	"title": "Platform P13",
+	"name": "P69",
+	"title": "Platform P69",
 	"description": "Development Platform for GSM SoCs (MT6261,MT2503,MT2625)",
-	"homepage": "https://www.OS-Q.com/P13",
+	"homepage": "https://www.OS-Q.com/P69",
 	"license": "MIT",
 	"version": "0.6.1",
-	"keywords": [
-		"dev-platform",
-		"OS-Q",
-		"MT2621",
-		"MT2503",
-		"MT2625",
-		"NBIoT",
-		"GSM"
-	],
 	"engines": {
 		"platformio": "^5"
 	},
+	"keywords": [
+		"dev-platform",
+		"OS-Q",
+		"MT6261",
+		"MT2503",
+		"ARM7EJS",
+		"GSM"
+	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/OS-Q/P13.git"
+		"url": "https://github.com/OS-Q/P69.git"
 	},
 	"packageRepositories": [
 		"http://182.61.61.133/link/toolchain/manifest.json",
@@ -30,17 +29,17 @@
 	],
 	"frameworks": {
 		"native": {
-			"package": "N13",
+			"package": "N69",
 			"script": "builder/framework/native.py",
-			"description": "Native Software Development Kit for GSM & NBIoT SoCs(MT6261, MT2503 and MT2625)",
-			"homepage": "https://github.com/OS-Q/N13",
+			"description": "Native Software Development Kit for GSM SoCs(MT6261/MT2503)",
+			"homepage": "https://github.com/OS-Q/N69",
 			"title": "SIWI GSM & NBIoT SDK"
 		},
 		"arduino": {
-			"package": "A13",
+			"package": "A69",
 			"script": "builder/framework/arduino.py",
 			"description": "Arduino Wiring-based Framework For GSM & NBIoT Modules",
-			"homepage": "https://github.com/OS-Q/A13",
+			"homepage": "https://github.com/OS-Q/A69",
 			"title": "Arduino Framework"
 		}
 	},
@@ -50,16 +49,16 @@
 			"owner": "platformio",
 			"version": "~1.80201.0"
 		},
-		"N13": {
+		"N69": {
 			"type": "framework",
 			"owner": "OS-Q",
-			"version": "https://github.com/OS-Q/N13.git"
+			"version": "https://github.com/OS-Q/N69.git"
 		},
-		"A13": {
+		"A69": {
 			"type": "framework",
 			"owner": "OS-Q",
 			"optional": true,
-			"version": "https://github.com/OS-Q/A13.git"
+			"version": "https://github.com/OS-Q/A69.git"
 		},
 		"tool-siwiflasher": {
 			"type": "uploader",

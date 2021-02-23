@@ -1,4 +1,4 @@
-name: P13
+name: P69
 
 on: [push]
 
@@ -8,7 +8,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: [3.8]
+        python-version: [3.7]
         example:
           - "examples/arduino-blink"
           - "examples/gpio-blink"
@@ -29,6 +29,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -U https://github.com/OS-Q/S03/archive/master.zip
           platformio platform install file://.
-      - name: Build examples
+      - name: Build
         run: |
           platformio run -d ${{ matrix.example }}

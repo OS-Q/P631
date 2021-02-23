@@ -11,7 +11,7 @@ env = DefaultEnvironment()
 platform = env.PioPlatform()
 board = env.BoardConfig()
 
-FRAMEWORK_DIR = platform.get_package_dir("A13")
+FRAMEWORK_DIR = platform.get_package_dir("A69")
 assert isdir(FRAMEWORK_DIR)
 
 def fota_crc16(data:bytearray, length):
