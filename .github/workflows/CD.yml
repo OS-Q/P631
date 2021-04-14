@@ -1,0 +1,117 @@
+name: CD
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.repository == 'OS-Q/P68'
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: [3.9]
+        examples:
+          - "examples/arduino-blink"
+          - "examples/gpio-blink"
+          - "examples/adc-example"
+          - "examples/socket-example"
+          - "examples/ssl-socket-example"
+          - "examples/ssl-socket-clientauth"
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: "recursive"
+        fetch-depth: 1
+
+    - name: Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install
+      run: |
+        python -m pip install --upgrade pip
+        pip install -U https://github.com/OS-Q/S03/archive/master.zip
+        qio platform install file://.
+
+    - name: Build
+      run: |
+        qio run -d ${{ matrix.examples }}
+
+  release:
+    needs:
+      - build
+    if: success() && startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone
+        uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+          fetch-depth: 1
+
+      - name: Generate tag
+        id: tag
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          echo "::set-output name=release_tag::Release_${GITHUB_REF/refs\/tags\//}_$(date +"%Y.%m.%d")"
+          echo "::set-output name=status::success"
+
+      - name: Package Src
+        id: package
+        run: |
+          echo "#package release : " >> CHANGELOG.txt
+          echo ${{ github.ref }} >> CHANGELOG.txt
+          echo ${{ github.sha }} >> CHANGELOG.txt
+          zip -r P68.zip boards builder link.json CHANGELOG.txt
+          echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+          echo "::set-output name=status::success"
+
+      - name: Upload Firmware
+        if: steps.package.outputs.status == 'success' && !cancelled()
+        uses: actions/upload-artifact@v2
+        with:
+          name: P68
+          path: ${{ env.FIRMWARE }}/P68.zip
+
+      - name: Upload Release
+        id: upload-release
+        uses: stopstopstop/release-action@master
+        if: steps.tag.outputs.status == 'success' && !cancelled()
+        env:
+          GITHUB_TOKEN: ${{ secrets.OSQ_REPO_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag.outputs.release_tag }}
+          files: |
+            ${{ env.FIRMWARE }}/P68.zip
+
+      - name: Setup OSS
+        uses: stopstopstop/ossutil-action@master
+        with:
+          endpoint: ${{ secrets.OSS_ENDPOINT }}
+          access-key-id: ${{ secrets.OSS_ACCESS_KEY_ID }}
+          access-key-secret: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+      - name: Upload To OSS
+        run: ossutil cp P68.zip ${{ secrets.OSS_BUCKET }}
+
+      - name: Send mail
+        uses: stopstopstop/mail-action@master
+        with:
+          server_address:  smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: package P68
+          body: file://README.md
+          to: ${{secrets.MAIL_TO}}
+          from: Qitas
+          cc: ${{github.event.pusher.email}}
+          content_type: text/html
+          convert_markdown: true
+          attachments: P68.zip
+

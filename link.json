@@ -20,6 +20,13 @@
 		"type": "git",
 		"url": "https://github.com/OS-Q/P68.git"
 	},
+	"packageRepositories": [
+		"http://182.61.61.133/link/toolchain/manifest.json",
+		"http://182.61.61.133/link/framework/manifest.json",
+		"http://182.61.61.133/link/toolchain/openocd.json",
+		"http://dl.platformio.org/packages/manifest.json",
+		"http://182.61.61.133/link/platformio.json"
+	],
 	"frameworks": {
 		"native": {
 			"package": "N69",
