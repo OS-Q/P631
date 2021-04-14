@@ -1,38 +1,43 @@
 {
 	"name": "P68",
-	"title": "Platform P68",
-	"description": "Development Platform for GSM SoCs (MT6261,MT2503,MT2625)",
-	"homepage": "https://www.OS-Q.com/P68",
+	"title": "SIWI GSM & NBIoT Platform",
+	"description": "Development Platform for GSM & NBIoT SoCs (MT6261, MT2503 and MT2625)",
+	"url": "https://siwi.in/",
+	"homepage": "https://help.siwi.in/",
 	"license": "MIT",
-	"version": "0.6.1",
+	"keywords": [
+		"dev-platform",
+		"GSM",
+		"NBIoT",
+		"Quectel",
+		"MT2621",
+		"MT2503",
+		"MT2625",
+		"GSM IoT",
+		"SIMCOM"
+	],
 	"engines": {
 		"platformio": "^5"
 	},
-	"keywords": [
-		"dev-platform",
-		"OS-Q",
-		"MT6261",
-		"MT2503",
-		"ARM7EJS",
-		"GSM"
-	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/OS-Q/P68.git"
+		"url": "https://github.com/siwiembedded/platform-siwigsm.git"
 	},
+	"version": "0.7.0",
+	"vendor": "SiWi Embedded Solutions Pvt. Ltd.",
 	"frameworks": {
-		"native": {
-			"package": "N69",
-			"script": "builder/framework/native.py",
-			"description": "Native Software Development Kit for GSM SoCs(MT6261/MT2503)",
-			"homepage": "https://github.com/OS-Q/N69",
+		"siwisdk": {
+			"package": "framework-siwisdk",
+			"script": "builder/framework/siwisdk.py",
+			"description": "SIWI Software Development Kit for GSM & NBIoT SoCs (MT6261, MT2503 and MT2625)",
+			"homepage": "https://github.com/siwiembedded/siwisdk",
 			"title": "SIWI GSM & NBIoT SDK"
 		},
 		"arduino": {
-			"package": "A69",
-			"script": "builder/framework/arduino.py",
-			"description": "Arduino Wiring-based Framework For GSM & NBIoT Modules",
-			"homepage": "https://github.com/OS-Q/A69",
+			"package": "framework-siwiduino",
+			"script": "builder/framework/siwiduino.py",
+			"description": "Arduino Wiring-based Framework For SiWi and Quectel Modules",
+			"homepage": "https://github.com/siwiembedded/siwiduino",
 			"title": "Arduino Framework"
 		}
 	},
@@ -42,20 +47,19 @@
 			"owner": "platformio",
 			"version": "~1.80201.0"
 		},
-		"N69": {
+		"framework-siwisdk": {
 			"type": "framework",
-			"owner": "OS-Q",
-			"version": "https://github.com/OS-Q/N69.git"
+			"version": "~0.7.0"
 		},
-		"A69": {
+		"framework-siwiduino": {
 			"type": "framework",
-			"owner": "OS-Q",
 			"optional": true,
-			"version": "https://github.com/OS-Q/A69.git"
+			"version": "~0.4.0"
 		},
 		"tool-siwiflasher": {
 			"type": "uploader",
-			"version": "~2.1.0"
+			"optional": true,
+			"version": "~2.2.0"
 		}
 	},
 	"pythonPackages": {
