@@ -3,8 +3,7 @@
 	"title": "Platform P68",
 	"description": "Development Platform for GSM SoCs (MT6261,MT2503,MT2625)",
 	"homepage": "https://www.OS-Q.com/P68",
-	"license": "MIT",
-	"version": "0.6.1",
+	"version": "0.7.0",
 	"engines": {
 		"platformio": "^5"
 	},
@@ -51,7 +50,8 @@
 		},
 		"tool-siwiflasher": {
 			"type": "uploader",
-			"version": "~2.1.0"
+			"optional": true,
+			"version": "~2.2.0"
 		}
 	},
 	"pythonPackages": {
