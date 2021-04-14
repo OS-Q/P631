@@ -20,27 +20,16 @@
 		"type": "git",
 		"url": "https://github.com/OS-Q/P68.git"
 	},
-	"packageRepositories": [
-		"http://182.61.61.133/link/toolchain/manifest.json",
-		"http://182.61.61.133/link/framework/manifest.json",
-		"http://182.61.61.133/link/toolchain/openocd.json",
-		"http://dl.platformio.org/packages/manifest.json",
-		"http://182.61.61.133/link/platformio.json"
-	],
 	"frameworks": {
 		"native": {
-			"package": "N69",
+			"package": "E68A",
 			"script": "builder/framework/native.py",
-			"description": "Native Software Development Kit for GSM SoCs(MT6261/MT2503)",
-			"homepage": "https://github.com/OS-Q/N69",
-			"title": "SIWI GSM & NBIoT SDK"
+			"homepage": "https://github.com/OS-Q/E68A"
 		},
 		"arduino": {
-			"package": "A69",
+			"package": "A68A",
 			"script": "builder/framework/arduino.py",
-			"description": "Arduino Wiring-based Framework For GSM & NBIoT Modules",
-			"homepage": "https://github.com/OS-Q/A69",
-			"title": "Arduino Framework"
+			"homepage": "https://github.com/OS-Q/A68A"
 		}
 	},
 	"packages": {
@@ -49,16 +38,16 @@
 			"owner": "platformio",
 			"version": "~1.80201.0"
 		},
-		"N69": {
+		"E68A": {
 			"type": "framework",
 			"owner": "OS-Q",
-			"version": "https://github.com/OS-Q/N69.git"
+			"version": "https://github.com/OS-Q/E68A.git"
 		},
-		"A69": {
+		"A68A": {
 			"type": "framework",
 			"owner": "OS-Q",
 			"optional": true,
-			"version": "https://github.com/OS-Q/A69.git"
+			"version": "https://github.com/OS-Q/A68A.git"
 		},
 		"tool-siwiflasher": {
 			"type": "uploader",

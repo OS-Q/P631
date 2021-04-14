@@ -10,7 +10,7 @@ env = DefaultEnvironment()
 platform = env.PioPlatform()
 board = env.BoardConfig()
 
-FRAMEWORK_DIR = platform.get_package_dir("N69")
+FRAMEWORK_DIR = platform.get_package_dir("E68A")
 assert isdir(FRAMEWORK_DIR)
 
 # Create Project Template
