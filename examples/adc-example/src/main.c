@@ -1,3 +1,9 @@
+/**
+ * @file main.c
+ * ADC Example
+ * @author Ajay Bhargav
+ *
+ */
 
 #include <stdio.h>
 #include <unistd.h>
@@ -7,8 +13,8 @@
 #include <os_api.h>
 #include <hw/adc.h>
 
-#define MVOLTPERDIV         2.737f
-#define ADC2MVOLT(val)      ((float)val * MVOLTPERDIV)
+#define MVOLTPERDIV 	2.737f
+#define ADC2MVOLT(val)	((float)val * MVOLTPERDIV)
 
 /**
  * URC Handler

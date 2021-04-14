@@ -1,3 +1,10 @@
+/**
+ * @file main.c
+ * TCP Socket example
+ * @author Ajay Bhargav
+ *
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
