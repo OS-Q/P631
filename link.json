@@ -23,12 +23,12 @@
 	"frameworks": {
 		"native": {
 			"package": "E68A",
-			"script": "builder/framework/native.py",
+			"script": "builder/extend/native.py",
 			"homepage": "https://github.com/OS-Q/E68A"
 		},
 		"arduino": {
 			"package": "A68A",
-			"script": "builder/framework/arduino.py",
+			"script": "builder/extend/arduino.py",
 			"homepage": "https://github.com/OS-Q/A68A"
 		}
 	},
