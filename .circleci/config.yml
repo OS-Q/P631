@@ -16,14 +16,16 @@ jobs:
           command: |
             python -m pip install --upgrade pip
             pip install -U https://github.com/platformio/platformio/archive/develop.zip
-            platformio platform install file://.
+            pio platform install file://.
       - run:
           name: "Build"
           command: |
-            platformio run -d examples/arduino
-            platformio run -d examples/native
-            platformio run -d examples/simba
-            platformio run -d examples/template-A
+            pio run -d examples/arduino-blink
+            pio run -d examples/gpio-blink
+            pio run -d examples/adc-example
+            pio run -d examples/ssl-socket-example
+            pio run -d examples/socket-example
+            pio run -d examples/ssl-socket-clientauth
 
   QIO:
     docker:
@@ -45,10 +47,12 @@ jobs:
       - run:
           name: "Build"
           command: |
-            qio run -d examples/arduino
-            qio run -d examples/native
-            qio run -d examples/simba
-            qio run -d examples/template-A
+            pio run -d examples/arduino-blink
+            pio run -d examples/gpio-blink
+            pio run -d examples/adc-example
+            pio run -d examples/ssl-socket-example
+            pio run -d examples/socket-example
+            pio run -d examples/ssl-socket-clientauth
 
 workflows:
     version: 2
