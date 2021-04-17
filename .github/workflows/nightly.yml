@@ -10,18 +10,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        python: [3.7,3.8,3.9]
-        tool:
-          - "PIO"
-          - "QIO"
         examples:
-          - "examples/arduino-blink"
-          - "examples/gpio-blink"
-          - "examples/adc-example"
-          - "examples/socket-example"
-          - "examples/ssl-socket-example"
-          - "examples/ssl-socket-clientauth"
+          - "arduino-blink"
+          - "gpio-blink"
+          - "adc-example"
+          - "socket-example"
+          - "ssl-socket-example"
+          - "ssl-socket-clientauth"
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: [3.7,3.9]
+        package:
+          - "release"
+          - "latest"
 
     runs-on: ${{ matrix.os }}
 
@@ -37,14 +37,14 @@ jobs:
           python-version: ${{ matrix.python }}
 
       - name: Install PIO
-        if: matrix.tool == 'PIO'
+        if: matrix.package == 'release'
         run: |
           python -m pip install --upgrade pip
-          pip install -U https://github.com/platformio/platformio/archive/develop.zip
-          pio platform install file://.
+          pip install -U https://github.com/OS-Q/S03/archive/master.zip
+          pio platform install https://github.com/OS-Q/P68/releases/latest/download/P68.zip
 
       - name: Install QIO
-        if: matrix.tool == 'QIO'
+        if: matrix.package == 'latest'
         run: |
           python -m pip install --upgrade pip
           pip install -U https://github.com/OS-Q/S03/archive/master.zip
@@ -54,4 +54,61 @@ jobs:
         id: build
         if: success()
         run: |
-          pio run -d ${{ matrix.examples }}
+          pio run -d examples/${{ matrix.examples }}
+          echo "::set-output name=status::success"
+
+      - name: notification
+        uses: stopstopstop/mqtt-action@master
+        with:
+          protocol: mqtt
+          host: ${{secrets.MQTT_SERVER}}
+          port: 1883
+          username: ${{secrets.MQTT_USERNAME}}
+          password: ${{secrets.MQTT_PASSWORD}}
+          topic: ${{github.repository}}/${{github.workflow}}/${{ matrix.os }}/${{ matrix.package }}/${{ matrix.python }}/${{ matrix.examples }}
+          message: ${{steps.build.outputs.status}}
+
+  platformio:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: [3.7,3.9]
+        example:
+          - "examples/arduino-blink"
+          - "examples/gpio-blink"
+          - "examples/adc-example"
+          - "examples/socket-example"
+          - "examples/ssl-socket-example"
+          - "examples/ssl-socket-clientauth"
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+          fetch-depth: 1
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: siwiembedded/platform-siwigsm
+          token: ${{ secrets.OSQ_REPO_TOKEN }}
+          path: siwigsm
+
+      - name: Install dependencies
+        working-directory: siwigsm
+        run: |
+          python -m pip install --upgrade pip
+          pip install -U https://github.com/platformio/platformio/archive/develop.zip
+          pio platform install file://.
+
+      - name: Build examples
+        working-directory: siwigsm
+        run: |
+          pio run -d ${{ matrix.example }}
