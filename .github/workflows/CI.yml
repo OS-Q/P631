@@ -12,7 +12,6 @@ env:
 
 jobs:
   build:
-    if: github.repository == 'OS-Q/P68'
     strategy:
       fail-fast: false
       matrix:
@@ -23,23 +22,23 @@ jobs:
           - "socket-example"
           - "ssl-socket-example"
           - "ssl-socket-clientauth"
+        # os: [ubuntu-latest]
 
-        os: [ubuntu-latest]
-        python: [3.9]
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest #${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: "recursive"
           fetch-depth: 1
 
-      - name: Python ${{ matrix.python }}
+      - name: Python
         uses: actions/setup-python@v1
         with:
-          python-version: ${{ matrix.python }}
+          python-version: 3.9
 
       - name: Install
+        if: github.repository == 'OS-Q/P68'
         run: |
           python -m pip install --upgrade pip
           pip install -U https://github.com/OS-Q/S03/archive/master.zip

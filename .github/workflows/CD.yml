@@ -126,9 +126,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -U https://github.com/OS-Q/S03/archive/master.zip
-          wget https://github.com/OS-Q/P68/releases/latest/download/P68.zip -O P68.zip
-          wget https://github.com/OS-Q/P68/releases/latest/download/README.txt -O README.txt
-          qio platform install file://./P68.zip
+          qio platform install https://github.com/OS-Q/P68/releases/latest/download/P68.zip
           echo "::set-output name=status::success"
 
       - name: ReBuild
@@ -155,7 +153,7 @@ jobs:
           cc: ${{github.event.pusher.email}}
           content_type: text/html
           convert_markdown: true
-          attachments: README.txt,P68.zip
+          attachments: P68.zip
           body: file://README.md
 
       - name: notification
