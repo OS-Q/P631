@@ -20,9 +20,9 @@
 		"url": "https://github.com/OS-Q/P68.git"
 	},
 	"frameworks": {
-		"native": {
+		"siwisdk": {
 			"package": "E68A",
-			"script": "extend/native.py",
+			"script": "extend/siwisdk.py",
 			"homepage": "https://github.com/OS-Q/E68A"
 		},
 		"arduino": {

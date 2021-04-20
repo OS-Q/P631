@@ -22,7 +22,7 @@
 	],
 	"frameworks": [
 		"arduino",
-		"native"
+		"siwisdk"
 	],
 	"name": "S20 GSM Module",
 	"upload": {
