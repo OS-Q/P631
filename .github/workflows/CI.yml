@@ -50,7 +50,6 @@ jobs:
         name: report
         path: cppcheck.txt
 
-jobs:
   build:
     strategy:
       fail-fast: false

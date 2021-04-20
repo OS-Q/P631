@@ -105,6 +105,7 @@ jobs:
           ossutil cp ${{ env.FIRMWARE }}/P68.zip ${{ secrets.OSS_BUCKET }} -rf
           echo "::set-output name=status::success"
 
+
   rebuild:
     needs:
       - release
@@ -155,6 +156,12 @@ jobs:
           convert_markdown: true
           attachments: P68.zip
           body: file://README.md
+
+      - name: Delet tag
+        run: |
+          git fetch
+          git tag -d ${GITHUB_REF/refs\/tags\//}
+          git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}
 
   build_fail:
     needs:
