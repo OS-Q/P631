@@ -1,6 +1,6 @@
 {
 	"build": {
-		"core": "gsm",
+		"core": "siwigsm",
 		"cpu": "cortex-m4",
 		"f_cpu": "78000000L",
 		"mcu": "MT2625",
@@ -24,12 +24,12 @@
 	],
 	"frameworks": [
 		"arduino",
-		"native"
+		"siwisdk"
 	],
 	"name": "Quectel BC20",
 	"upload": {
 		"maximum_ram_size": 98304,
-		"maximum_size": 139264,
+		"maximum_size": 204800,
 		"require_upload_port": true,
 		"speed": 460800
 	},

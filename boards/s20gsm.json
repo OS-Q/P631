@@ -1,6 +1,6 @@
 {
 	"build": {
-		"core": "gsm",
+		"core": "siwigsm",
 		"cpu": "arm9ejs",
 		"f_cpu": "260000000L",
 		"mcu": "MT2503",
@@ -22,7 +22,7 @@
 	],
 	"frameworks": [
 		"arduino",
-		"native"
+		"siwisdk"
 	],
 	"name": "S20 GSM Module",
 	"upload": {

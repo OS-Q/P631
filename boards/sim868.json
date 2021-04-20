@@ -4,10 +4,16 @@
 		"cpu": "arm9ejs",
 		"f_cpu": "260000000L",
 		"mcu": "MT2503",
-		"variant": "mc60",
+		"variant": "sim868",
 		"newlib": "nano",
 		"siwilib": "release",
-		"extra_flags": "-DPLATFORM_MC60=1"
+		"extra_flags": "-DPLATFORM_SIM868=1",
+		"hwids": [
+			[
+				"0x0E8D",
+				"0x0003"
+			]
+		]
 	},
 	"connectivity": [
 		"gsm",
@@ -18,13 +24,13 @@
 		"arduino",
 		"siwisdk"
 	],
-	"name": "Quectel MC20",
+	"name": "SIMCOM SIM868 GSM Module",
 	"upload": {
 		"maximum_ram_size": 96256,
 		"maximum_size": 262144,
 		"require_upload_port": true,
 		"speed": 460800
 	},
-	"url": "https://www.quectel.com/cn/product/mc20.htm",
-	"vendor": "Quectel Wireless Solutions Co., Ltd."
+	"url": "https://www.simcom.com/product/SIM868.html",
+	"vendor": "SIMCom"
 }

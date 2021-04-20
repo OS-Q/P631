@@ -1,5 +1,12 @@
 __pycache__/
 .bak
 *.pyc
-*.pio/
+*.pio
 *.vscode/
+LICENSE*
+*.png
+*.jpg
+*.txt
+README*
+*.md
+examples/**/*.travis.yml

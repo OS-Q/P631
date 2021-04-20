@@ -1,6 +1,6 @@
 {
 	"build": {
-		"core": "gsm",
+		"core": "siwigsm",
 		"cpu": "arm9ejs",
 		"f_cpu": "260000000L",
 		"mcu": "MT6261",
@@ -15,7 +15,7 @@
 	],
 	"frameworks": [
 		"arduino",
-		"native"
+		"siwisdk"
 	],
 	"name": "Quectel M66",
 	"upload": {
