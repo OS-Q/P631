@@ -15,8 +15,8 @@ jobs:
           name: "Install"
           command: |
             python -m pip install --upgrade pip
-            pip install -U https://github.com/OS-Q/S03/archive/master.zip
-            pio platform install https://platformio.oss-accelerate.aliyuncs.com/P68.zip
+            pip install -U https://github.com/OS-Q/S03/releases/latest/download/S03.zip
+            pio platform install https://github.com/OS-Q/P68/releases/latest/download/P68.zip
       - run:
           name: "Build"
           command: |
@@ -42,7 +42,7 @@ jobs:
           name: "Install"
           command: |
             python -m pip install --upgrade pip
-            pip install -U https://github.com/OS-Q/S03/archive/master.zip
+            pip install -U https://github.com/OS-Q/S03/releases/latest/download/S03.zip
             qio platform install file://.
       - run:
           name: "Build"

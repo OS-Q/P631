@@ -12,6 +12,6 @@
 
 ### [简介](https://github.com/OS-Q/P68/wiki)
 
-[P68](https://github.com/OS-Q/P68) 应用于 ARM7EJS 处理器
+[P68](https://github.com/OS-Q/P68) 应用于 MT2503/MT6261/MT2625 开发
 
 ### [源圈 OS-Q (Open Source & QA) ](http://www.OS-Q.com)

@@ -35,7 +35,7 @@ jobs:
     - name: Install
       run: |
         python -m pip install --upgrade pip
-        pip install -U https://github.com/OS-Q/S03/archive/master.zip
+        pip install -U https://github.com/OS-Q/S03/releases/latest/download/S03.zip
         qio platform install file://.
 
     - name: Build
@@ -125,7 +125,7 @@ jobs:
         id: getgh
         run: |
           python -m pip install --upgrade pip
-          pip install -U https://github.com/OS-Q/S03/archive/master.zip
+          pip install -U https://github.com/OS-Q/S03/releases/latest/download/S03.zip
           qio platform install https://github.com/OS-Q/P68/releases/latest/download/P68.zip
           echo "::set-output name=status::success"
 
@@ -156,6 +156,17 @@ jobs:
           attachments: P68.zip
           body: file://README.md
 
+  build_fail:
+    needs:
+      - build
+    if: failure() && startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+
       - name: notification
         uses: stopstopstop/mqtt-action@master
         with:
@@ -164,5 +175,41 @@ jobs:
           port: 1883
           username: ${{secrets.MQTT_USERNAME}}
           password: ${{secrets.MQTT_PASSWORD}}
-          topic: ${{github.repository}}/${{github.workflow}}
-          message: ${{steps.rebuild.outputs.status}}
+          topic: ${{github.repository}}/${{github.workflow}}/${GITHUB_REF/refs\/tags\//}
+          message: "build fail"
+
+      - name: Delet tag
+        id: delet
+        run: |
+          git fetch
+          git tag -d ${GITHUB_REF/refs\/tags\//}
+          git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}
+
+  release_fail:
+    needs:
+      - release
+    if: failure() && startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+
+      - name: notification
+        uses: stopstopstop/mqtt-action@master
+        with:
+          protocol: mqtt
+          host: ${{secrets.MQTT_SERVER}}
+          port: 1883
+          username: ${{secrets.MQTT_USERNAME}}
+          password: ${{secrets.MQTT_PASSWORD}}
+          topic: ${{github.repository}}/${{github.workflow}}/${GITHUB_REF/refs\/tags\//}
+          message: "release fail"
+
+      - name: Delet tag
+        id: delet
+        run: |
+          git fetch
+          git tag -d ${GITHUB_REF/refs\/tags\//}
+          git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}

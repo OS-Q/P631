@@ -2,13 +2,13 @@ kind: pipeline
 name: default
 
 steps:
-- name: P68
+- name: OSQ
   image: python:3
   commands:
   - apt update
   - apt install -y git
   - git submodule update --init --recursive
-  - pip install -U https://github.com/OS-Q/S03/archive/master.zip
+  - pip install -U https://github.com/OS-Q/S03/releases/latest/download/S03.zip
   - qio platform install file://.
   - qio run -d examples/arduino-blink
   - qio run -d examples/gpio-blink
