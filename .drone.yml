@@ -1,14 +1,14 @@
 kind: pipeline
-name: default
+name: OSQ
 
 steps:
-- name: OSQ
+- name: QIO
   image: python:3
   commands:
   - apt update
   - apt install -y git
   - git submodule update --init --recursive
-  - pip install -U https://github.com/OS-Q/S03/releases/latest/download/S03.zip
+  - pip install -U https://github.com/OS-Q/M03/releases/latest/download/qio.zip
   - qio platform install file://.
   - qio run -d examples/arduino-blink
   - qio run -d examples/gpio-blink
@@ -16,3 +16,20 @@ steps:
   - qio run -d examples/ssl-socket-example
   - qio run -d examples/socket-example
   - qio run -d examples/ssl-socket-clientauth
+
+- name: PIO
+  image: python:3
+  commands:
+  - apt update
+  - apt install -y git
+  - git submodule update --init --recursive
+  - pip install -U platformio
+  - pio platform install file://.
+  - pio run -d examples/arduino-blink
+  - pio run -d examples/gpio-blink
+  - pio run -d examples/adc-example
+  - pio run -d examples/ssl-socket-example
+  - pio run -d examples/socket-example
+  - pio run -d examples/ssl-socket-clientauth
+
+

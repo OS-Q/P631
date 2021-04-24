@@ -9,12 +9,13 @@ environment:
     - PLATFORMIO_PROJECT_DIR: "examples/ssl-socket-example"
     - PLATFORMIO_PROJECT_DIR: "examples/ssl-socket-clientauth"
 
+platform:
+  - x64
 install:
   - cmd: git submodule update --init --recursive
   - cmd: SET PATH=C:\Python37\Scripts;%PATH%
-  - cmd: pip3 install -U https://github.com/OS-Q/S03/archive/master.zip
-  - cmd: pio platform install file://.
+  - cmd: pip3 install -U https://github.com/OS-Q/M03/releases/latest/download/qio.zip
+  - cmd: qio platform install file://.
 
 test_script:
-  - cmd: pio run -d %PLATFORMIO_PROJECT_DIR%
-
+  - cmd: qio run -d %PLATFORMIO_PROJECT_DIR%
