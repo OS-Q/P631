@@ -57,7 +57,7 @@ jobs:
         example:
           - "gpio-blink"
           - "adc-example"
-          # - "arduino-blink"
+          - "arduino-blink"
           - "socket-example"
           - "ssl-socket-example"
           - "ssl-socket-clientauth"
