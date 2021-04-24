@@ -1,7 +1,7 @@
 {
 	"name": "P68",
 	"title": "LOGICROM Development Platform",
-	"description": "Development Platform for 4G LTE, GSM & NBIoT SoCs (MT6261, MT2503 and MT2625)",
+	"description": "Development Platform for 4G LTE, GSM & NBIoT Chipsets",
 	"url": "https://logicrom.com/",
 	"homepage": "https://logicrom.com/",
 	"license": "MIT",
@@ -23,21 +23,21 @@
 		"type": "git",
 		"url": "https://github.com/waybyte/platform-logicrom.git"
 	},
-	"version": "0.7.0",
+	"version": "0.8.1",
 	"vendor": "WAYBYTE Solutions",
 	"frameworks": {
-		"siwisdk": {
-			"package": "framework-siwisdk",
-			"script": "builder/framework/siwisdk.py",
-			"description": "SIWI Software Development Kit for GSM & NBIoT SoCs (MT6261, MT2503 and MT2625)",
-			"homepage": "https://github.com/siwiembedded/siwisdk",
-			"title": "SIWI GSM & NBIoT SDK"
+		"logicromsdk": {
+			"package": "framework-logicromsdk",
+			"script": "builder/framework/logicromsdk.py",
+			"description": "LOGICROM Software Development Kit for 4G LTE, GSM and NB-IoT Modules",
+			"homepage": "https://github.com/waybyte/logicromsdk",
+			"title": "LOGICROM SDK"
 		},
 		"arduino": {
-			"package": "framework-siwiduino",
-			"script": "builder/framework/siwiduino.py",
-			"description": "Arduino Wiring-based Framework For SiWi and Quectel Modules",
-			"homepage": "https://github.com/siwiembedded/siwiduino",
+			"package": "framework-logicromarduino",
+			"script": "builder/framework/arduino.py",
+			"description": "Arduino Wiring-based Framework For LOGICROM Platform",
+			"homepage": "https://github.com/waybyte/Arduino_LogicROM",
 			"title": "Arduino Framework"
 		}
 	},
@@ -47,19 +47,19 @@
 			"owner": "platformio",
 			"version": "~1.80201.0"
 		},
-		"framework-siwisdk": {
+		"framework-logicromsdk": {
 			"type": "framework",
-			"version": "~0.7.0"
+			"version": "~0.8.0"
 		},
-		"framework-siwiduino": {
+		"framework-logicromarduino": {
 			"type": "framework",
 			"optional": true,
-			"version": "~0.4.0"
+			"version": "~0.5.0"
 		},
-		"tool-siwiflasher": {
+		"tool-logicromflasher": {
 			"type": "uploader",
 			"optional": true,
-			"version": "~2.2.0"
+			"version": "~2.3.0"
 		}
 	},
 	"pythonPackages": {

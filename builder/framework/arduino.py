@@ -1,3 +1,18 @@
+# Copyright 2021 WAYBYTE Solutions
+#
+# SPDX-License-Identifier: MIT
+#
+
+"""
+Arduino
+
+Arduino Wiring-based Framework allows writing cross-platform software to
+control devices attached to a wide range of Arduino boards to create all
+kinds of creative coding, interactive objects, spaces or physical experiences.
+
+http://arduino.cc/en/Reference/HomePage
+"""
+
 from os.path import abspath, isdir, isfile, join, dirname, getsize
 from os import remove
 from shutil import copyfile
@@ -10,14 +25,8 @@ env = DefaultEnvironment()
 platform = env.PioPlatform()
 board = env.BoardConfig()
 
-FRAMEWORK_DIR = platform.get_package_dir("E68A")
+FRAMEWORK_DIR = platform.get_package_dir("framework-logicromarduino")
 assert isdir(FRAMEWORK_DIR)
-
-# Create Project Template
-main_c = join(env.subst("$PROJECT_DIR"), "src", "main.c")
-main_cpp = join(env.subst("$PROJECT_DIR"), "src", "main.cpp")
-if (False == isfile(main_c)) and (False == isfile(main_cpp)):
-    copyfile(join(FRAMEWORK_DIR, "template", "main.c"), main_c)
 
 def fota_crc16(data:bytearray, length):
     crc = 0
@@ -127,7 +136,8 @@ env.Append(
     ],
 
     CFLAGS=[
-        "-std=gnu11"
+        "-std=gnu11",
+		"-Wno-old-style-declaration"
     ],
 
     CXXFLAGS=[
@@ -140,12 +150,18 @@ env.Append(
 
     CPPDEFINES=[
         ("__BUFSIZ__", "512"),
-        ("__FILENAME_MAX__", "256")
+        ("__FILENAME_MAX__", "256"),
+        ("F_CPU", "$BOARD_F_CPU"),
+		("ARDUINO", 10813),
+		"ARDUINO_ARCH_ARM",
+        ("ARDUINO_VARIANT", '\\"%s\\"' % board.get("build.variant").replace('"', "")),
+        ("ARDUINO_BOARD", '\\"%s\\"' % board.get("name").replace('"', ""))
     ],
 
     CPPPATH=[
-        join(FRAMEWORK_DIR, "include"),
-        join(FRAMEWORK_DIR, "include", "ril")
+        join(FRAMEWORK_DIR, "cores", board.get("build.core"), "logicromsdk", "include"),
+        join(FRAMEWORK_DIR, "cores", board.get("build.core"), "logicromsdk", "include", "ril"),
+        join(FRAMEWORK_DIR, "cores", board.get("build.core"))
     ],
 
     LINKFLAGS=[
@@ -157,16 +173,24 @@ env.Append(
         "-nostdlib",
         "-nostartfiles",
         "-nodefaultlibs",
+        "-u", "main",
         "-Wl,--defsym,platform_init=platform_%s_init" % board.get("build.variant")
     ],
 
-    LIBS=["c", "gcc", "m"],
-
     LIBPATH=[
-        join(FRAMEWORK_DIR, "lib")
+        join(FRAMEWORK_DIR, "cores", board.get("build.core"), "logicromsdk", "lib")
     ],
 
-    LIBSOURCE_DIRS=[join(FRAMEWORK_DIR, "libraries")],
+    LIBS=[
+        "c",
+        "gcc",
+        "m",
+        "stdc++"
+    ],
+
+    LIBSOURCE_DIRS=[
+        join(FRAMEWORK_DIR, "libraries")
+    ],
 
     BUILDERS=dict(
         ElfToBin=Builder(
@@ -195,7 +219,7 @@ if board.get("build.mcu") != "MT2625":
         ],
 
         LIBS=[
-            "siwisdk",
+            "logicrom",
         ],
     )
 else:
@@ -224,7 +248,7 @@ else:
         ],
 
         LIBS=[
-            "siwinbiotsdk",
+            "logicromnbiot",
         ],
     )
 
@@ -241,13 +265,41 @@ if board.get("build.mcu") != "MT2625" and board.get("build.newlib") == "nano":
 # copy CCFLAGS to ASFLAGS (-x assembler-with-cpp mode)
 env.Append(ASFLAGS=env.get("CCFLAGS", [])[:])
 
-def load_siwilib_debug():
+def load_logicrom_debug():
     for i, libs in enumerate(env["LIBS"]):
-        if libs.startswith("siwisdk") or libs.startswith("siwinbiot"):
+        if libs.startswith("logicrom") or libs.startswith("logicromnbiot"):
             env["LIBS"][i] = libs + "_debug"
 
-if board.get("build.siwilib") == "debug":
-    load_siwilib_debug()
+
+if board.get("build.logicromtype") == "debug":
+    load_logicrom_debug()
 
 if env.GetBuildType() == "debug":
-    load_siwilib_debug()
+    load_logicrom_debug()
+
+#
+# Target: Build Core Library
+#
+
+libs = []
+
+if "build.variant" in env.BoardConfig():
+    env.Append(
+        CPPPATH=[
+            join(FRAMEWORK_DIR, "variants",
+                 env.BoardConfig().get("build.variant"))
+        ]
+    )
+    libs.append(env.BuildLibrary(
+        join("$BUILD_DIR", "FrameworkArduinoVariant"),
+        join(FRAMEWORK_DIR, "variants", board.get("build.variant"))
+    ))
+
+envsafe = env.Clone()
+
+libs.append(envsafe.BuildLibrary(
+    join("$BUILD_DIR", "FrameworkArduino"),
+    join(FRAMEWORK_DIR, "cores", board.get("build.core"))
+))
+
+env.Prepend(LIBS=libs)
