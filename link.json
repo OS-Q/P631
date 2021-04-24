@@ -28,14 +28,14 @@
 	"frameworks": {
 		"logicromsdk": {
 			"package": "framework-logicromsdk",
-			"script": "builder/framework/logicromsdk.py",
+			"script": "extend/framework/logicromsdk.py",
 			"description": "LOGICROM Software Development Kit for 4G LTE, GSM and NB-IoT Modules",
 			"homepage": "https://github.com/waybyte/logicromsdk",
 			"title": "LOGICROM SDK"
 		},
 		"arduino": {
 			"package": "framework-logicromarduino",
-			"script": "builder/framework/arduino.py",
+			"script": "extend/framework/arduino.py",
 			"description": "Arduino Wiring-based Framework For LOGICROM Platform",
 			"homepage": "https://github.com/waybyte/Arduino_LogicROM",
 			"title": "Arduino Framework"
