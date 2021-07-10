@@ -94,7 +94,7 @@ jobs:
 
       - name: Generate tag
         id: tag
-        if: startsWith(github.ref, 'refs/tags/') && github.repository == 'OS-Q/P68'
+        if: startsWith(github.ref, 'refs/tags/') && github.repository == 'OS-Q/P631'
         run: |
           echo "::set-output name=release_tag::release_$(date +"%Y.%m.%d")_${GITHUB_REF/refs\/tags\//}"
           echo "::set-output name=status::success"
@@ -102,7 +102,7 @@ jobs:
       - name: Package
         id: package
         run: |
-          echo "Platform P68 for GSM" >> log.txt
+          echo "Platform P631 for GSM" >> log.txt
           echo $(date +"%Y.%m.%d") >> log.txt
           echo ${GITHUB_REF/refs\/tags\//} >> log.txt
           echo -e "www.OS-Q.com\n" >> log.txt
@@ -117,7 +117,7 @@ jobs:
         if: steps.package.outputs.status == 'success' && !cancelled()
         uses: actions/upload-artifact@v2
         with:
-          name: P68
+          name: P631
           path: ${{ env.FIRMWARE }}/package.zip
 
       - name: Upload Release
@@ -142,9 +142,9 @@ jobs:
       - name: Upload OSS
         id: OSS
         run: |
-          cp package.zip P68.zip
+          cp package.zip P631.zip
           cp package.zip P68_${GITHUB_REF/refs\/tags\//}.zip
-          ossutil cp ${{ env.FIRMWARE }}/P68.zip ${{ secrets.OSS_P_BUCKET }} -rf
+          ossutil cp ${{ env.FIRMWARE }}/P631.zip ${{ secrets.OSS_P_BUCKET }} -rf
           ossutil cp ${{ env.FIRMWARE }}/P68_${GITHUB_REF/refs\/tags\//}.zip ${{ secrets.OSS_P_BUCKET }} -f
           echo "::set-output name=status::success"
 
@@ -225,7 +225,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -U https://github.com/OS-Q/M03/releases/latest/download/qio.zip
-          qio platform install https://github.com/OS-Q/P68/releases/latest/download/package.zip
+          qio platform install https://github.com/OS-Q/P631/releases/latest/download/package.zip
           echo "::set-output name=status::success"
 
       - name: ReBuild
@@ -243,13 +243,13 @@ jobs:
           server_port: 465
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
-          subject: OS-Q P68 package released
+          subject: OS-Q P631 package released
           to: ${{secrets.MAIL_TO}}
           from: Qitas
           cc: ${{github.event.pusher.email}}
           content_type: text/html
           convert_markdown: true
-          attachments: https://github.com/OS-Q/P68/releases/latest/download/log.txt
+          attachments: https://github.com/OS-Q/P631/releases/latest/download/log.txt
           body: file://./qio/mail.md
 
 
