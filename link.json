@@ -1,19 +1,16 @@
 {
 	"name": "P631",
-	"title": "LOGICROM Development Platform",
-	"description": "Development Platform for 4G LTE, GSM & NBIoT Chipsets",
+	"title": "OS-Q GSM Development Platform",
+	"description": "Development Platform for GSM Chipsets",
 	"url": "http://www.OS-Q.com/",
 	"homepage": "http://www.OS-Q.com/",
 	"license": "MIT",
 	"keywords": [
+		"OS-Q",
 		"dev-platform",
 		"GSM",
-		"NBIoT",
-		"Quectel",
 		"MT2621",
 		"MT2503",
-		"MT2625",
-		"GSM IoT",
 		"SIMCOM"
 	],
 	"engines": {
