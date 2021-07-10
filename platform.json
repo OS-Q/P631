@@ -8,12 +8,8 @@
 	"keywords": [
 		"dev-platform",
 		"GSM",
-		"NBIoT",
-		"Quectel",
 		"MT2621",
 		"MT2503",
-		"MT2625",
-		"GSM IoT",
 		"SIMCOM"
 	],
 	"engines": {
@@ -24,21 +20,14 @@
 		"url": "https://github.com/waybyte/platform-logicrom.git"
 	},
 	"version": "0.8.1",
-	"vendor": "WAYBYTE Solutions",
 	"frameworks": {
 		"logicromsdk": {
-			"package": "framework-logicromsdk",
-			"script": "builder/framework/logicromsdk.py",
-			"description": "LOGICROM Software Development Kit for 4G LTE, GSM and NB-IoT Modules",
-			"homepage": "https://github.com/waybyte/logicromsdk",
-			"title": "LOGICROM SDK"
+			"package": "F632",
+			"script": "builder/framework/logicromsdk.py"
 		},
 		"arduino": {
-			"package": "framework-logicromarduino",
-			"script": "builder/framework/arduino.py",
-			"description": "Arduino Wiring-based Framework For LOGICROM Platform",
-			"homepage": "https://github.com/waybyte/Arduino_LogicROM",
-			"title": "Arduino Framework"
+			"package": "F631",
+			"script": "builder/framework/arduino.py"
 		}
 	},
 	"packages": {
@@ -47,14 +36,15 @@
 			"owner": "platformio",
 			"version": "~1.80201.0"
 		},
-		"framework-logicromsdk": {
-			"type": "framework",
-			"version": "~0.8.0"
-		},
-		"framework-logicromarduino": {
+		"F631": {
 			"type": "framework",
 			"optional": true,
-			"version": "~0.5.0"
+			"version": "https://github.com/OS-Q/F631.git"
+		},
+		"F632": {
+			"type": "framework",
+			"optional": true,
+			"version": "https://github.com/OS-Q/F632.git"
 		},
 		"tool-logicromflasher": {
 			"type": "uploader",

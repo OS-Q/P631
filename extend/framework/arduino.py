@@ -10,7 +10,7 @@ env = DefaultEnvironment()
 platform = env.PioPlatform()
 board = env.BoardConfig()
 
-FRAMEWORK_DIR = platform.get_package_dir("framework-logicromarduino")
+FRAMEWORK_DIR = platform.get_package_dir("F631")
 assert isdir(FRAMEWORK_DIR)
 
 def fota_crc16(data:bytearray, length):

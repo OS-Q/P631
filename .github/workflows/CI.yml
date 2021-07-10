@@ -35,7 +35,7 @@ jobs:
         max_ctu_depth: 2
         std: c11
         output_file: ./codecheck.txt
-        other_options: --bug-hunting --verbose --std=c11
+        other_options: --bug-hunting --verbose --std=c99
 
     - name: report
       uses: Qful/check-action@master
@@ -96,39 +96,39 @@ jobs:
           name: qio_${{ matrix.example }}_${{ matrix.os }}
           path: examples/${{ matrix.example }}/.pio/build
 
-  qio_pass:
-    needs:
-      - QIO
-    if: success()
-    runs-on: ubuntu-latest
-    steps:
-      - name: notification
-        uses: Qful/mqtt-action@master
-        with:
-          protocol: mqtt
-          host: ${{secrets.MQTT_SERVER}}
-          port: 1883
-          username: ${{secrets.MQTT_USERNAME}}
-          password: ${{secrets.MQTT_PASSWORD}}
-          topic: ${{github.repository}}/${{github.workflow}}
-          message: "QIO success"
+  # qio_pass:
+  #   needs:
+  #     - QIO
+  #   if: success()
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: notification
+  #       uses: Qful/mqtt-action@master
+  #       with:
+  #         protocol: mqtt
+  #         host: ${{secrets.MQTT_SERVER}}
+  #         port: 1883
+  #         username: ${{secrets.MQTT_USERNAME}}
+  #         password: ${{secrets.MQTT_PASSWORD}}
+  #         topic: ${{github.repository}}/${{github.workflow}}
+  #         message: "QIO success"
 
-  qio_fail:
-    needs:
-      - QIO
-    if: failure()
-    runs-on: ubuntu-latest
-    steps:
-      - name: notification
-        uses: Qful/mqtt-action@master
-        with:
-          protocol: mqtt
-          host: ${{secrets.MQTT_SERVER}}
-          port: 1883
-          username: ${{secrets.MQTT_USERNAME}}
-          password: ${{secrets.MQTT_PASSWORD}}
-          topic: ${{github.repository}}/${{github.workflow}}
-          message: "QIO failure"
+  # qio_fail:
+  #   needs:
+  #     - QIO
+  #   if: failure()
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: notification
+  #       uses: Qful/mqtt-action@master
+  #       with:
+  #         protocol: mqtt
+  #         host: ${{secrets.MQTT_SERVER}}
+  #         port: 1883
+  #         username: ${{secrets.MQTT_USERNAME}}
+  #         password: ${{secrets.MQTT_PASSWORD}}
+  #         topic: ${{github.repository}}/${{github.workflow}}
+  #         message: "QIO failure"
 
   PIO:
     strategy:
@@ -177,36 +177,36 @@ jobs:
           name: pio_${{ matrix.example }}_${{ matrix.os }}
           path: examples/${{ matrix.example }}/.pio/build
 
-  pio_pass:
-    needs:
-      - PIO
-    if: success()
-    runs-on: ubuntu-latest
-    steps:
-      - name: notification
-        uses: Qful/mqtt-action@master
-        with:
-          protocol: mqtt
-          host: ${{secrets.MQTT_SERVER}}
-          port: 1883
-          username: ${{secrets.MQTT_USERNAME}}
-          password: ${{secrets.MQTT_PASSWORD}}
-          topic: ${{github.repository}}/${{github.workflow}}
-          message: "PIO success"
+  # pio_pass:
+  #   needs:
+  #     - PIO
+  #   if: success()
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: notification
+  #       uses: Qful/mqtt-action@master
+  #       with:
+  #         protocol: mqtt
+  #         host: ${{secrets.MQTT_SERVER}}
+  #         port: 1883
+  #         username: ${{secrets.MQTT_USERNAME}}
+  #         password: ${{secrets.MQTT_PASSWORD}}
+  #         topic: ${{github.repository}}/${{github.workflow}}
+  #         message: "PIO success"
 
-  pio_fail:
-    needs:
-      - PIO
-    if: failure()
-    runs-on: ubuntu-latest
-    steps:
-      - name: notification
-        uses: Qful/mqtt-action@master
-        with:
-          protocol: mqtt
-          host: ${{secrets.MQTT_SERVER}}
-          port: 1883
-          username: ${{secrets.MQTT_USERNAME}}
-          password: ${{secrets.MQTT_PASSWORD}}
-          topic: ${{github.repository}}/${{github.workflow}}
-          message: "PIO failure"
+  # pio_fail:
+  #   needs:
+  #     - PIO
+  #   if: failure()
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: notification
+  #       uses: Qful/mqtt-action@master
+  #       with:
+  #         protocol: mqtt
+  #         host: ${{secrets.MQTT_SERVER}}
+  #         port: 1883
+  #         username: ${{secrets.MQTT_USERNAME}}
+  #         password: ${{secrets.MQTT_PASSWORD}}
+  #         topic: ${{github.repository}}/${{github.workflow}}
+  #         message: "PIO failure"

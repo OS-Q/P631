@@ -6,8 +6,7 @@ __pycache__/
 *.rst
 # *.md
 **/*/README*
-LICENSE*
-*.png
+# *.png
 *.jpg
 *.bak
 examples/**/*.yml

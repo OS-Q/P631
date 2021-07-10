@@ -15,7 +15,7 @@ env = DefaultEnvironment()
 platform = env.PioPlatform()
 board = env.BoardConfig()
 
-FRAMEWORK_DIR = platform.get_package_dir("framework-logicromsdk")
+FRAMEWORK_DIR = platform.get_package_dir("F632")
 assert isdir(FRAMEWORK_DIR)
 
 # Create Project Template
